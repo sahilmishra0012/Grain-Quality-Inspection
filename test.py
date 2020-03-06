@@ -18,12 +18,8 @@ for cnt in contours:
     approx = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
     sq_cnts.append(cnt)
     
-print(len(sq_cnts))
+print(len(sq_cnts))    
     
-    
-    
-    
-
 
 count=1
 lower_red = np.array([5,91,176])# 176, 91, 5
@@ -33,10 +29,10 @@ for i in range(len(sq_cnts)):
     newimg = img[y:y+h,x:x+w]
     mask = cv2.inRange(newimg,lower_red, upper_red)
     res = cv2.bitwise_and(newimg,newimg, mask= mask)
-    res[np.where(res<190)] = 0
+    res[np.where(res<100)] = 0
 
 
-    if (res.any()!=0) and w*h>500:
+    if (res.any()!=0) and w*h>5000:
         cv2.imshow('Image',newimg)
         cv2.waitKey(0)
 cv2.destroyAllWindows()
