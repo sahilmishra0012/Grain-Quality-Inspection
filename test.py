@@ -15,6 +15,7 @@ sq_cnts = []
 for cnt in contours:
     sq_cnts.append(cnt)
 
+count=0
 lower_red = np.array([5,91,176])
 upper_red = np.array([131,183,235])
 for i in range(len(sq_cnts)):
@@ -26,5 +27,7 @@ for i in range(len(sq_cnts)):
 
     if (res.any()!=0) and w*h>70000:
         cv2.imshow('Image',newimg)
+        cv2.imwrite(str(count)+'.jpg',newimg)
         cv2.waitKey(0)
+        count=count+1
 cv2.destroyAllWindows()
