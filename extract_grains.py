@@ -1,11 +1,10 @@
 from cv2 import cv2
 import numpy as np
 
-img=cv2.imread('wheat.jpg')
+img=cv2.imread('111.jpg')
 dimensions = img.shape
-blank_image = np.zeros((dimensions[0],dimensions[1],3), np.uint8)
 gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-binary_img = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,5,5)
+binary_img = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,3,3)
 
 binary_img = cv2.bitwise_not(binary_img)
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
@@ -26,7 +25,7 @@ for i in range(len(sq_cnts)):
     res = cv2.bitwise_and(newimg,newimg, mask= mask)
     res[np.where(res<100)] = 0
 
-    if (res.any()!=0) and w*h>5000:
+    if (res.any()!=0) and w*h>70000:
         cv2.imshow('Image',newimg)
         cv2.waitKey(0)
 cv2.destroyAllWindows()
